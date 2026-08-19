@@ -48,4 +48,4 @@ client.on('messageCreate', async (message) => {
 });
 
 // ضع التوكن الخاص بك هنا
-client.login('MTUzNjA5Njc1ODUzMzMzMjk5Mg.GtpxQ9.jd8FeGR6Itb-fSpgSUBqn0GQCQmCvoeBGbbGLY');
+client.login(process.env.TOKEN);
