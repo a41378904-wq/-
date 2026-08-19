@@ -1,0 +1,11 @@
+{
+  "name": "Dashboard-bot",
+  "version": "1.0.0",
+  "description": "Professional Shop Bot with Dashboard",
+  "main": "index.js",
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "express": "^4.18.2",
+    "ejs": "^3.1.9"
+  }
+}
