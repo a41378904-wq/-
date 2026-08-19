@@ -1,0 +1,9 @@
+{
+  "prefix": "!",
+  "status": {
+    "text": "the Dashboard",
+    "type": "WATCHING"
+  },
+  "welcome_message": "Welcome to the server!",
+  "auto_mod_enabled": true
+}
