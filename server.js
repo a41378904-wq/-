@@ -1,7 +1,7 @@
 const express = require('express');
 const settingsManager = require('./settings_manager.js');
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Middleware لتفسير البيانات القادمة من النماذج (Forms)
 app.use(express.urlencoded({ extended: true }));
@@ -28,5 +28,5 @@ app.post('/update', (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`🌐 Dashboard server running at http://localhost:${PORT}`);
+    console.log(`🌐 Dashboard server running on port ${PORT}`);
 });
