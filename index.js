@@ -47,5 +47,5 @@ client.on('messageCreate', async (message) => {
     }
 });
 
-// ضع التوكن الخاص بك هنا
+console.log("Checking Token:", process.env.TOKEN ? "✅ Found" : "❌ Not Found");
 client.login(process.env.TOKEN);
