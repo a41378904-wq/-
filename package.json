@@ -4,7 +4,7 @@
   "description": "Professional Shop Bot with Dashboard",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js & node server.js"
   },
   "dependencies": {
     "discord.js": "^14.14.1",
