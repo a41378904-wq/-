@@ -69,3 +69,10 @@ app.post('/update', (req, res) => {
             settings[key] = value;
         }
     }
+    settingsManager.saveSettings(settings);
+    res.redirect('/');
+});
+
+app.listen(PORT, () => {
+    console.log(`🌐 Dashboard server running on port ${PORT}`);
+});
