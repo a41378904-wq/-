@@ -56,18 +56,31 @@ app.get('/logout', (req, res) => {
 app.post('/update', (req, res) => {
     if (!req.isAuthenticated()) return res.redirect('/');
 
-    const settings = settingsManager.getSettings();
-    
-    // تحديث كل خانة بشكل مباشر ومضمون
-    settings.prefix = req.body.prefix;
-    settings.status.text = req.body.status_text;
-    settings.welcome_message = req.body.welcome_message;
-    settings.auto_mod_enabled = (req.body.auto_mod_enabled === 'true');
+    try {
+        const settings = settingsManager.getSettings();
+        
+        // تحديث القيم مع التأكد من تحويل الأنواع
+        settings.prefix = req.body.prefix;
+        settings.welcome_message = req.body.welcome_message;
+        settings.auto_mod_enabled = (req.body.auto_mod_enabled === 'true');
 
-    settingsManager.saveSettings(settings);
-    res.redirect('/');
+        // التعامل مع الكائن المتداخل (Nested Object) بأمان
+        if (!settings.status) settings.status = { text: "" };
+        settings.status.text = req.body.status_text;
+
+        // حفظ الإعدادات
+        settingsManager.saveSettings(settings);
+        
+        // هذا السطر سيطبع لك في الـ Logs في Railway للتأكد
+        console.log('✅ تم تحديث الإعدادات بنجاح:', JSON.stringify(settings));
+        
+        res.redirect('/');
+    } catch (error) {
+        console.error('❌ فشل تحديث الإعدادات:', error);
+        res.status(500).send('حدث خطأ أثناء الحفظ. راجع الـ Logs.');
+    }
 });
 
 app.listen(PORT, () => {
-console.log(`🌐 Dashboard server running on port ${PORT}`);
+    console.log(`🌐 Dashboard server running on port ${PORT}`);
 });
