@@ -57,22 +57,17 @@ app.post('/update', (req, res) => {
     if (!req.isAuthenticated()) return res.redirect('/');
 
     const settings = settingsManager.getSettings();
-    for (const key in req.body) {
-        let value = req.body[key];
-        if (value === 'true') value = true;
-        else if (value === 'false') value = false;
-        else if (!isNaN(value) && value.trim() !== "") value = Number(value);
+    
+    // تحديث كل خانة بشكل مباشر ومضمون
+    settings.prefix = req.body.prefix;
+    settings.status.text = req.body.status_text;
+    settings.welcome_message = req.body.welcome_message;
+    settings.auto_mod_enabled = (req.body.auto_mod_enabled === 'true');
 
-        if (key === 'status_text') {
-            settings.status.text = value;
-        } else {
-            settings[key] = value;
-        }
-    }
     settingsManager.saveSettings(settings);
     res.redirect('/');
 });
 
 app.listen(PORT, () => {
-    console.log(`🌐 Dashboard server running on port ${PORT}`);
+console.log(`🌐 Dashboard server running on port ${PORT}`);
 });
